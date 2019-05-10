@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/recipe.api/obj
+/recipe.business/obj
+/recipe.data/obj
+/.vs
+/recipe.api/bin
+/recipe.business/bin
+/recipe.data/bin
