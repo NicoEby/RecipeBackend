@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ch.thommenmedia.common.Interfaces;
+using ch.thommenmedia.common.Operation;
 using recipe.data.Models;
 
 namespace recipe.business.Operations.Recipe
 {
-    public class GetRecipesOperation
+    public class GetRecipesOperation : RecipeOperationBase<GetRecipesOperationInput, IQueryable<data.Models.Recipe>>
     {
         public RecipeContext Context = new RecipeContext();
-      public  IQueryable<data.Models.Recipe> Execute(GetRecipesOperationInput input)
+
+        protected override IQueryable<data.Models.Recipe> Execute(GetRecipesOperationInput input)
         {
             var query = Context.GetRecipes.AsQueryable();
-            if(input.Id != null)
+            if (input.Id != null)
             {
                 query = query.Where(q => q.Id == input.Id);
             }
             return query;
+        }
+
+        public GetRecipesOperation(ISecurityAccessor securityAccessor) : base(securityAccessor)
+        {
         }
     }
 

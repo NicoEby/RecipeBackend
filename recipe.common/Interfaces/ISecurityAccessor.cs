@@ -9,7 +9,7 @@ namespace ch.thommenmedia.common.Interfaces
     /// </summary>
     public interface ISecurityAccessor
     {
-        IIdentity CurrentIdentity { get; }
+        IBaseIdentity CurrentIdentity { get; }
         Guid CurrentUserid { get; }
         IPrincipal CurrentPrincipal { get; }
         bool IsAuthenticated { get; }
