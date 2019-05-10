@@ -9,3 +9,6 @@
 /recipe.api/bin
 /recipe.business/bin
 /recipe.data/bin
+/recipe.common/.vs
+/recipe.common/bin
+/recipe.common/obj

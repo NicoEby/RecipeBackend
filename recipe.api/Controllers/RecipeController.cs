@@ -14,7 +14,7 @@ namespace recipe.api.Controllers
     {
         public List<data.Models.Recipe> Get()
         {
-            return new GetRecipesOperation().Execute(new GetRecipesOperationInput());
+            return new GetRecipesOperation().Execute(new GetRecipesOperationInput()).ToList();
         }
     }
 }
