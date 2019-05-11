@@ -11,5 +11,7 @@ namespace ch.thommenmedia.common.Interfaces
         /// mostly the userId
         /// </summary>
         Guid Id { get; set; }
+        string UserName { get; set; }
+        string Token { get; set; }
     }
 }

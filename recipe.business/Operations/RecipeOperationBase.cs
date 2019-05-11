@@ -6,23 +6,33 @@ using ch.thommenmedia.common.Operation;
 
 namespace recipe.business.Operations
 {
-    public class RecipeOperationBase<TInput, TOutput> : OperationBase<TInput, TOutput>
+    public abstract class RecipeOperationBase<TInput, TOutput> : OperationBase<TInput, TOutput>
     {
-        public RecipeOperationBase(ISecurityAccessor securityAccessor) : base(securityAccessor)
+        protected RecipeOperationBase(ISecurityAccessor securityAccessor) : base(securityAccessor)
         {
         }
 
-        protected override TOutput Execute(TInput input)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// must be implemented from the consuming class
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        protected abstract override TOutput Execute(TInput input);
 
+        /// <summary>
+        /// can be overwritten but normally handels the inputless requests
+        /// </summary>
+        /// <returns></returns>
         protected override TOutput Execute()
         {
             // fake executor (empty input) => input must support empty constructor
             return Execute(Activator.CreateInstance<TInput>());
         }
 
+        /// <summary>
+        /// checks the basic if a user is authenticated
+        /// </summary>
+        /// <returns></returns>
         protected override bool Authorize()
         {
             return SecurityAccessor.IsAuthenticated;

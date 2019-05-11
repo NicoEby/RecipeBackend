@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.IO;
 using System.Text;
 using ch.thommenmedia.common.Interfaces;
+using ch.thommenmedia.common.Setting;
 using Microsoft.Extensions.DependencyInjection;
 using recipe.business.Security;
 
@@ -32,7 +33,8 @@ namespace recipe.business.Helper
                 collection = new ServiceCollection();
 
             collection.AddScoped<ISecurityAccessor, SecurityAccessor>();
-            
+            collection.AddSingleton<IApplicationSettingDbProvider>(new ApplicationSettingProvider(collection.BuildServiceProvider()));
+
             return collection;
         }
     }

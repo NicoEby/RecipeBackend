@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace recipe.api.Controllers
 {
-    // will be activated later
-    //[Authorize]
+    [Authorize]
     public abstract class BaseController : ControllerBase
     {
         protected readonly ISecurityAccessor SecurityAccesor;

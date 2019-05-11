@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
+using ch.thommenmedia.common.Security;
 
 namespace ch.thommenmedia.common.Interfaces
 {
@@ -13,6 +15,7 @@ namespace ch.thommenmedia.common.Interfaces
         Guid CurrentUserid { get; }
         IPrincipal CurrentPrincipal { get; }
         bool IsAuthenticated { get; }
+        byte[] Secret { get; }
 
         string ObjectPrivilegeName(Type entityType);
         string ObjectPrivilegeName(string objectName);
@@ -40,5 +43,22 @@ namespace ch.thommenmedia.common.Interfaces
         /// <param name="userid"></param>
         /// <param name="reason">the reason why you want to impersonate</param>
         void Impersonate(Guid userid, string reason = "");
+
+
+        /// <summary>
+        /// is used to authenticate a user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="token">the token to save if the authentication was successful</param>
+        /// <returns></returns>
+        IBaseIdentity AuthenticateUser(AuthenticateUserRequest request);
+
+        /// <summary>
+        /// is used to login with an access token
+        /// </summary>
+        /// <param name="token">the token as generated previously</param>
+        /// <returns></returns>
+        IBaseIdentity AuthenticateUser(string token);
+
     }
 }
