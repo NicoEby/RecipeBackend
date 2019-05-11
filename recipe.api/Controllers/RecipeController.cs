@@ -21,12 +21,32 @@ namespace recipe.api.Controllers
             
         }
 
+        /// <summary>
+        /// returns a list of all recipes
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public List<RecipeDto> Get()
         {
             var getter = ActivatorUtilities.CreateInstance<GetRecipesOperation>(ServiceProvider);
             return getter.Start().ProjectTo<RecipeDto>().ToList();
         }
 
-        
+
+        /// <summary>
+        /// will return one element
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public RecipeDto Get(Guid id)
+        {
+            var getter = ActivatorUtilities.CreateInstance<GetRecipesOperation>(ServiceProvider);
+            return getter.Start(new GetRecipesOperationInput()
+            {
+                Id = id
+            }).ProjectTo<RecipeDto>().FirstOrDefault();
+        }
+
     }
 }
